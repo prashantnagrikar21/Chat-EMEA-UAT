@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>EMEA Messaging Chat - UAT</title>
+</head>
+
+<body>
+
+<h3>Chat Support EMEA - UAT</h3>
+
+<script type="text/javascript">
+    function initEmbeddedMessaging() {
+        try {
+            embeddedservice_bootstrap.settings.language = 'en_US';
+
+            embeddedservice_bootstrap.init(
+                '00DDh0000003ik2', // Org Id (UAT)
+                'EMEA_Chat', // Messaging Deployment
+                'https://enphase--uat.sandbox.my.site.com/ESWEMEAChat1770204923100',
+                {
+                    scrt2URL: 'https://enphase--uat.sandbox.my.salesforce-scrt.com'
+                }
+            );
+        } catch (err) {
+            console.error('Embedded Messaging init error:', err);
+        }
+    }
+
+    function setHiddenPrechatFields() {
+        try {
+            embeddedservice_bootstrap.prechatAPI.setHiddenPrechatFields({
+                Chat_Source: 'ITK',
+                Persona: 'Installer',
+                Site_Type: 'Storage'
+            });
+        } catch (e) {
+            console.error('Prechat error:', e);
+        }
+    }
+
+    window.addEventListener('onEmbeddedMessagingReady', function () {
+        setHiddenPrechatFields();
+    });
+</script>
+
+<script
+    type="text/javascript"
+    src="https://enphase--uat.sandbox.my.site.com/ESWEMEAChat1770204923100/assets/js/bootstrap.min.js"
+    onload="initEmbeddedMessaging()">
+</script>
+
+</body>
+</html>
